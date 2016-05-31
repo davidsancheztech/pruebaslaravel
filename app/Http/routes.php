@@ -15,11 +15,14 @@ Route::get('/', function () {
     return view('child', ['titulo' => 'Título de la página', 'dato' => array('dato_prueba'=>'ejemplo de dato prueba')]);
 });
 */
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
+
 
 Route::get('foo', function () {
     return 'Hello World';
 });
-
 
 Route::get('lang/{lang}', function ($lang) {
     session(['lang' => $lang]);
@@ -32,3 +35,4 @@ Route::controllers([
 	'/{id}/control/{tipo}' => 'CentralController',
 	'/' => 'CentralController',
 ]);
+

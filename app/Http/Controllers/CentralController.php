@@ -3,6 +3,8 @@ namespace pruebalaravel\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
+
 use pruebalaravel\Productos\Productos;
 use pruebalaravel\Album;
 
@@ -15,7 +17,9 @@ class CentralController extends Controller {
 
 	public function getIndex($id = NULL, $prueba = NULL)
 	{
-		var_dump($id, $prueba);
+		$usuario = Auth::user();
+
+		var_dump($usuario->nombre, $id, $prueba);
 		$productos = new Productos;
 		$productos = $productos->listado();
 
@@ -53,6 +57,8 @@ class CentralController extends Controller {
 		$album->descripcion = $request->get('descripcion');
 
 		$album->save();
+
+		//return response()->json(['name' => 'Abigail', 'state' => 'CA']);
 
 		return redirect('/')->with('actualizado','El albúm se actualizó');
 	}	
